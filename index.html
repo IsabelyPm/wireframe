@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Isabely | Portfólio DE & TI</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind CDN para prototipagem rápida, design responsivo e class utilitaria -->
+    <script src="https://unpkg.com/lucide@latest"></script> <!-- Lucide Icons para ícones modernos e personalizáveis -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap');
         
@@ -52,11 +52,11 @@
             background: linear-gradient(to right, rgba(230, 51, 77, 0.05), transparent);
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> <!-- Font Awesome para ícones adicionais, se necessário -->
 </head>
 <body>
 
-    <!-- NAV -->
+    <!-- NAV (menu interativo)-->
     <nav class="fixed w-full z-50 bg-[#0f0f0f]/80 backdrop-blur-md border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
@@ -73,7 +73,7 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION (comecinho do site)-->
     <section class="min-h-screen hero-gradient flex flex-col justify-center items-center text-center px-6 pt-20">
         <p class="text-[10px] uppercase tracking-[0.4em] text-gray-400 mb-6">Portfólio Criativo</p>
         <h1 class="font-serif text-5xl md:text-8xl mb-8 leading-tight">
@@ -327,7 +327,7 @@
     </div>
 </section>
 
-    <!-- SEÇÃO DE WIREFRAME & ESTRUTURAÇÃO (DESIGN EDUCACIONAL) -->
+<!-- SEÇÃO DE WIREFRAME & ESTRUTURAÇÃO (DESIGN EDUCACIONAL) -->
 <section id="wireflow" class="py-24 bg-[#1a1a1a] border-t border-white/5">
     <div class="max-w-6xl mx-auto px-6">
         <div class="mb-16">
@@ -381,7 +381,7 @@
             </p>
         </div>
     </div>
-    <!-- BOTÃO PARA ABRIR O ESCOPO -->
+<!-- BOTÃO PARA ABRIR O ESCOPO -->
      <br><br>
 <div class="text-center pb-12 bg-[#1a1a1a]">
     <button onclick="openModal()" class="border border-accent-pink text-accent-pink hover:bg-accent-pink hover:text-white transition-all px-6 py-3 rounded-full font-bold text-xs uppercase tracking-widest">
@@ -402,7 +402,7 @@
             <p class="text-[10px] text-gray-500 font-mono">Estrutura de Navegação Intencional</p>
         </div>
 
-        <!-- DESENHO DO WIREFRAME ADAPTADO AO SEU SITE -->
+        <!-- DESENHO DO WIREFRAME ADAPTADO AO SITE -->
         <div class="border-2 border-gray-300 rounded p-4 space-y-3 font-mono text-[9px] uppercase bg-white">
             
             <!-- Navbar -->
@@ -411,7 +411,7 @@
                 <div class="flex gap-2"><div class="w-4 h-1 bg-gray-200"></div><div class="w-4 h-1 bg-gray-200"></div></div>
             </div>
 
-            <!-- SEÇÃO: HERO (A que faltava!) -->
+            <!-- SEÇÃO: HERO -->
             <div class="border border-dashed border-gray-400 p-6 text-center space-y-2 bg-gray-50">
                 <div class="h-1 bg-gray-200 w-16 mx-auto"></div> <!-- Subtítulo: Portfólio Criativo -->
                 <div class="h-4 bg-gray-400 w-3/4 mx-auto"></div> <!-- Título Principal -->
@@ -419,7 +419,7 @@
                 <div class="h-5 bg-accent-pink/40 w-16 mx-auto rounded-full mt-2"></div> <!-- Botão: Ver Projetos -->
             </div>
             
-            <!-- SEÇÃO: SOBRE MIM (Imagem + Texto) -->
+            <!-- SEÇÃO: SOBRE MIM -->
             <div class="border border-gray-200 p-4 flex gap-3">
                 <div class="w-20 h-24 border border-gray-300 flex items-center justify-center text-gray-300">✕</div>
                 <div class="flex-1 space-y-2">
@@ -430,7 +430,7 @@
                 </div>
             </div>
 
-            <!-- SEÇÃO: JORNADA ACADÊMICA (Grid 2x2) -->
+            <!-- SEÇÃO: JORNADA ACADÊMICA -->
             <div class="border border-gray-200 p-3 text-center space-y-2">
                 <div class="h-2 bg-gray-300 w-24 mx-auto mb-2"></div>
                 <div class="grid grid-cols-2 gap-2">
@@ -441,7 +441,7 @@
                 </div>
             </div>
 
-            <!-- SEÇÃO: CURSOS (Grid de Ícones/Cards) -->
+            <!-- SEÇÃO: CERTIFICAÇÕES -->
             <div class="border border-gray-200 p-3 text-center">
                 <div class="h-2 bg-gray-300 w-20 mx-auto mb-3"></div>
                 <div class="grid grid-cols-3 gap-1">
@@ -454,7 +454,7 @@
                 </div>
             </div>
 
-            <!-- SEÇÃO: ESTRUTURA COGNITIVA (A que você acabou de fazer) -->
+            <!-- SEÇÃO: ESTRUTURA COGNITIVA -->
             <div class="border-2 border-dashed border-accent-pink/30 p-3 bg-accent-pink/5">
                 <div class="h-2 bg-accent-pink/20 w-24 mx-auto mb-3"></div>
                 <div class="grid grid-cols-3 gap-2">
@@ -472,7 +472,7 @@
         </div>
         
         <p class="mt-6 text-[9px] text-gray-500 leading-relaxed italic text-center">
-            "Design educacional aplicado: a estrutura modular permite a escalabilidade do portfólio acadêmico na UNIFESP e UFMS."
+            "Design educacional aplicado: a estrutura modular permite a escalabilidade do portfólio acadêmico na UNIFESP."
         </p>
     </div>
 </div>
@@ -534,6 +534,7 @@
                 closeModal();
             }
         }
+
 let projetosRevelados = false;
 
 function revealProjects(shouldScroll = true) {
@@ -543,7 +544,7 @@ function revealProjects(shouldScroll = true) {
         // Dispara as animações simultaneamente
         section.classList.remove('opacity-0', 'max-h-0', '-translate-y-10');
         
-        // Aplicamos os novos estados
+        // Novos estados
         section.classList.add('opacity-100', 'translate-y-0');
         section.style.maxHeight = "5000px"; // Um valor alto o suficiente para cobrir tudo
         
@@ -572,7 +573,6 @@ window.addEventListener('scroll', function() {
         }
     }
 });
-    </script>
-
-    </body>
+</script>
+</body>
 </html>
