@@ -51,10 +51,21 @@
             border-left-color: #E6334D;
             background: linear-gradient(to right, rgba(230, 51, 77, 0.05), transparent);
         }
+
+  #google_translate_element, .skiptranslate.goog-te-gadget { display: none !important; }
+    body { top: 0px !important; }
+    .goog-te-banner-frame { display: none !important; }
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> <!-- Font Awesome para ícones adicionais, se necessário -->
+
 </head>
 <body>
+<!-- BOTÃO DE TRADUÇÃO OTIMIZADO -->
+<button onclick="toggleTranslate()" class="fixed top-4 right-4 z-[10000] flex items-center gap-2 bg-[#1a1a1a]/80 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:border-accent-pink/50 transition-all group">
+    <i data-lucide="languages" class="w-4 h-4 text-accent-pink group-hover:rotate-12 transition-transform"></i>
+    <span class="text-xs font-bold text-white uppercase tracking-widest">Translate / Traduzir</span>
+</button>
 
     <!-- NAV (menu interativo)-->
     <nav class="fixed w-full z-50 bg-[#0f0f0f]/80 backdrop-blur-md border-b border-white/10">
@@ -64,6 +75,7 @@
                 <span class="font-bold tracking-widest text-sm uppercase">Isabely</span>
             </div>
             <div class="hidden md:flex gap-8 text-[10px] uppercase tracking-widest font-semibold text-gray-400">
+            
                 <a href="#sobre" class="hover:text-accent-pink transition">Sobre</a>
                 <a href="#formacao" class="hover:text-accent-pink transition">Formação</a>
                 <a href="#cursos" class="hover:text-accent-pink transition">Certificados</a>
@@ -506,73 +518,92 @@
     </footer>
 
 
+<!-- Script do Google Translate (Obrigatório estar fora do bloco principal) -->
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <script>
-// Inicializa os ícones do Lucide
-        lucide.createIcons();
+    // 1. Inicialização do Google Translate (Deve ser global)
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'pt',
+            includedLanguages: 'en,es,pt',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
 
-        // Funções do Modal de Wireframe
-        function openModal() {
-            const modal = document.getElementById('wireframeModal');
-            if (modal) {
-                modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
+    // 2. Função para o seu botão "Ousado" (Fallback de segurança)
+    function toggleTranslate() {
+        const frame = document.querySelector('.goog-te-menu-frame');
+        if (!frame) {
+            // Se o widget falhar, abre o tradutor em nova aba
+            window.open('https://translate.google.com/translate?sl=pt&tl=en&u=' + window.location.href, '_blank');
+        } else {
+            alert("Selecione o idioma no menu que apareceu no topo.");
         }
+    }
 
-        function closeModal() {
-            const modal = document.getElementById('wireframeModal');
-            if (modal) {
-                modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
+    // 3. Inicializa os ícones do Lucide
+    lucide.createIcons();
+
+    // 4. Funções do Modal de Wireframe
+    function openModal() {
+        const modal = document.getElementById('wireframeModal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
         }
+    }
 
-        // Fechar se clicar fora do conteúdo branco do modal
-        window.onclick = function(event) {
-            const modal = document.getElementById('wireframeModal');
-            if (event.target == modal) {
-                closeModal();
-            }
+    function closeModal() {
+        const modal = document.getElementById('wireframeModal');
+        if (modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
         }
+    }
 
-let projetosRevelados = false;
+    window.onclick = function(event) {
+        const modal = document.getElementById('wireframeModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
 
-function revealProjects(shouldScroll = true) {
-    const section = document.getElementById('projetos');
-    
-    if (section && !projetosRevelados) {
-        // Dispara as animações simultaneamente
-        section.classList.remove('opacity-0', 'max-h-0', '-translate-y-10');
+    // 5. Lógica de Revelação de Projetos (Design Educacional: Segmentação)
+    let projetosRevelados = false;
+
+    function revealProjects(shouldScroll = true) {
+        const section = document.getElementById('projetos');
         
-        // Novos estados
-        section.classList.add('opacity-100', 'translate-y-0');
-        section.style.maxHeight = "5000px"; // Um valor alto o suficiente para cobrir tudo
-        
-        projetosRevelados = true;
-    }
+        if (section && !projetosRevelados) {
+            section.classList.remove('opacity-0', 'max-h-0', '-translate-y-10');
+            section.classList.add('opacity-100', 'translate-y-0');
+            section.style.maxHeight = "5000px"; 
+            projetosRevelados = true;
+        }
 
-    if (shouldScroll) {
-        // Espera um pouco para o início do deslizamento antes de rolar a tela
-        setTimeout(() => {
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-    }
-}
-
-// O ouvinte de scroll continua monitorando a posição
-window.addEventListener('scroll', function() {
-    if (!projetosRevelados) {
-        const sectionSobre = document.getElementById('sobre');
-        if (sectionSobre) {
-            const sectionBottom = sectionSobre.getBoundingClientRect().bottom;
-            const triggerPosition = window.innerHeight * 0.8;
-
-            if (sectionBottom < triggerPosition) {
-                revealProjects(false); 
-            }
+        if (shouldScroll && section) {
+            setTimeout(() => {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
         }
     }
-});
+
+    // 6. Ouvinte de Scroll
+    window.addEventListener('scroll', function() {
+        if (!projetosRevelados) {
+            const sectionSobre = document.getElementById('sobre');
+            if (sectionSobre) {
+                const sectionBottom = sectionSobre.getBoundingClientRect().bottom;
+                const triggerPosition = window.innerHeight * 0.8;
+
+                if (sectionBottom < triggerPosition) {
+                    revealProjects(false); 
+                }
+            }
+        }
+    });
 </script>
 </body>
 </html>
