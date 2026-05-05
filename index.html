@@ -66,6 +66,35 @@
     <i data-lucide="languages" class="w-4 h-4 text-accent-pink group-hover:rotate-12 transition-transform"></i>
     <span class="text-xs font-bold text-white uppercase tracking-widest">Translate / Traduzir</span>
 </button>
+<!-- BOTÃO DE ACESSIBILIDADE -->
+<div class="fixed bottom-6 right-6 z-[10000]">
+    <button onclick="toggleAccessMenu()" class="bg-accent-pink p-3 rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center">
+        <i data-lucide="accessibility" class="text-white w-6 h-6"></i>
+    </button>
+
+    <!-- MENU DE OPÇÕES (Escondido inicialmente) -->
+    <div id="accessMenu" class="hidden absolute bottom-16 right-0 bg-[#1a1a1a] border border-white/10 p-4 rounded-2xl w-64 shadow-2xl">
+        <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-4 italic">Acessibilidade</p>
+        
+        <button onclick="toggleContrast()" class="w-full flex items-center gap-3 p-3 hover:bg-white/5 rounded-lg text-sm transition text-white">
+            <i data-lucide="eye" class="w-4 h-4 text-accent-pink"></i> Alto Contraste
+        </button>
+
+        <div class="h-[1px] bg-white/5 my-2"></div>
+
+        <button onclick="initLibras()" class="w-full flex items-center gap-3 p-3 hover:bg-white/5 rounded-lg text-sm transition text-white">
+            <i data-lucide="hand" class="w-4 h-4 text-accent-pink"></i> Ativar VLibras
+        </button>
+    </div>
+</div>
+
+<!-- CONTAINER VLIBRAS (Obrigatório para o widget funcionar) -->
+<div vw class="enabled">
+    <div vw-access-button class="active hidden"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
 
     <!-- NAV (menu interativo)-->
     <nav class="fixed w-full z-50 bg-[#0f0f0f]/80 backdrop-blur-md border-b border-white/10">
@@ -604,6 +633,30 @@
             }
         }
     });
+
+    // Abrir/Fechar Menu
+function toggleAccessMenu() {
+    const menu = document.getElementById('accessMenu');
+    menu.classList.toggle('hidden');
+}
+
+// Lógica de Alto Contraste (Filtro para Daltonismo/Baixa Visão)
+function toggleContrast() {
+    document.body.classList.toggle('high-contrast');
+}
+
+// Inicialização do VLibras (Widget oficial do Governo para tradução em Libras)
+function initLibras() {
+    if (!window.VLibras) {
+        const script = document.createElement('script');
+        script.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
+        script.onload = () => {
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+            alert("Avatar de Libras ativado! Clique no ícone azul que apareceu na tela.");
+        };
+        document.body.appendChild(script);
+    }
+}
 </script>
 </body>
 </html>
