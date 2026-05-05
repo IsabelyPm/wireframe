@@ -15,7 +15,16 @@
             color: #ffffff;
             scroll-behavior: smooth;
         }
+                /* Filtro de Alto Contraste */
+        .high-contrast {
+            filter: contrast(150%) grayscale(100%);
+            background: #000 !important;
+        }
 
+        .high-contrast * {
+            color: #fff !important;
+            border-color: #fff !important;
+        }
         .font-serif { font-family: 'Playfair Display', serif; }
         
         .bg-dark-burgundy { background: linear-gradient(135deg, #2D0B10 0%, #0F0F0F 100%); }
@@ -55,6 +64,16 @@
   #google_translate_element, .skiptranslate.goog-te-gadget { display: none !important; }
     body { top: 0px !important; }
     .goog-te-banner-frame { display: none !important; }
+
+    /* Esconde o botão azul padrão do VLibras sem desativar a funcionalidade */
+[vw-access-button] {
+    display: none !important;
+}
+
+/* Garante que o widget (a caixa do boneco) apareça sobre os outros elementos quando aberto */
+.vp-v-container {
+    z-index: 10001 !important;
+}
 
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> <!-- Font Awesome para ícones adicionais, se necessário -->
@@ -645,18 +664,33 @@ function toggleContrast() {
     document.body.classList.toggle('high-contrast');
 }
 
-// Inicialização do VLibras (Widget oficial do Governo para tradução em Libras)
 function initLibras() {
-    if (!window.VLibras) {
-        const script = document.createElement('script');
-        script.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
-        script.onload = () => {
-            new window.VLibras.Widget('https://vlibras.gov.br/app');
-            alert("Avatar de Libras ativado! Clique no ícone azul que apareceu na tela.");
-        };
-        document.body.appendChild(script);
+    // Busca o componente do VLibras que está escondido pelo CSS
+    const trigger = document.querySelector('.access-button') || 
+                    document.querySelector('[vw-access-button]') ||
+                    document.querySelector('.vw-access-button');
+
+    if (trigger) {
+        trigger.click(); // Dispara o clique no botão original oculto
+        toggleAccessMenu(); // Fecha o seu menu de acessibilidade
+    } else {
+        console.error("O widget VLibras ainda não foi carregado.");
+        alert("Carregando o assistente de Libras... Tente novamente em 2 segundos.");
     }
 }
+</script>
+<!-- WIDGET VLIBRAS -->
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+    // Inicializa o widget assim que o script carregar
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
 </script>
 </body>
 </html>
